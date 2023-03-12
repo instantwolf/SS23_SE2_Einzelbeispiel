@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/enterMatrikelNumber_textView"
+        android:layout_width="320dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/mainActivity_enterMatrikelNumber"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/matrikelNumber_editText"
+        android:layout_width="271dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="75dp"
+        android:ems="10"
+        android:hint="@string/mainActivity_editTextHint"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterMatrikelNumber_textView" />
+
+    <TextView
+        android:id="@+id/serverResponseLabel_textView"
+        android:layout_width="320dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="53dp"
+        android:text="@string/mainActivity_serverResponse"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/matrikelNumber_editText" />
+
+    <TextView
+        android:id="@+id/serverResponse_textView"
+        android:layout_width="301dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="55dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serverResponseLabel_textView" />
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="141dp"
+        android:text="@string/mainActivity_buttonLabel_send"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serverResponse_textView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

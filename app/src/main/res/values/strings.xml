@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SE2-Einzelbeispiel</string>
+    <string name="server_name">se2-isys.aau.at</string>
+    <integer name="server_port">53212</integer>
+    <string name="mainActivity_enterMatrikelNumber">Gib deine Matrikelnummer ein</string>
+    <string name="mainActivity_editTextHint">01561466</string>
+    <string name="mainActivity_serverResponse">Antwort vom Server</string>
+    <string name="mainActivity_buttonLabel_send">Abschicken</string>
+</resources>
