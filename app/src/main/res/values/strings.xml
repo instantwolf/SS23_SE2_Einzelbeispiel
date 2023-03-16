@@ -6,4 +6,5 @@
     <string name="mainActivity_editTextHint">01561466</string>
     <string name="mainActivity_serverResponse">Antwort vom Server</string>
     <string name="mainActivity_buttonLabel_send">Abschicken</string>
+    <string name="mainActivity_calculate_button">Berechnen</string>
 </resources>

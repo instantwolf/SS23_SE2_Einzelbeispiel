@@ -18,6 +18,9 @@ import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static int ASCIINumberToLoweCaseCharacterOffset = 48;
+    private static int ASCIIZeroToSpecialCharacterOffset = 58;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +45,24 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Info","Thread ist fertig");
             }
         });
+
+        final Button calculateButton = findViewById(R.id.calculate_button);
+
+        calculateButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                Log.d("Info", "Calculate button clicked" );
+                Log.d("Info","Updating Matrikelnumber");
+                calculateAndUpdate(true);
+            }
+
+        });
     }
 
 
     private void  writeMatrToServer() {
 
             //get the text from the field an check if not empty
-            String matrNr = getValueFromTextField();
+            String matrNr = getMatrikelNumberFromField();
             //now check
             if(!checkMatrNr(matrNr)) {
                 printmessage("Bitte geben Sie eine Matrikelnummer ein", "Hinweis");
@@ -63,9 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 throw new Exception("Fehler beim Herstellen der Verbindung");
             }
 
-
             //writeToServer(socket, matrNr);
-
             //everything went fine.. now wait for response;
             Log.d("Info", "Matrikelnumber has been send to server");
 
@@ -79,19 +91,15 @@ public class MainActivity extends AppCompatActivity {
             writer.flush();
             // writer.close();
 
-
             String response = reader.readLine();
 
             Log.d("Info", "reponse:"+response);
             //set Response to field
             writeToResponseField(response);
-
-
         }
         catch (Exception ex){
             Log.d("Error","MainActivity.createconnection"+ex.getMessage());
             printmessage(ex.getMessage(), "Fehler");
-
         }
     }
 
@@ -134,10 +142,50 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * We assume that:
+     *  - change every SECOND number means => In a String which consists of characters 0..n-1 that every odd index is changed
+     *  -- SINCE we dont haven´t been given a nice conversion (the number zero can occur, is changed to what??)
+     *  -- and given the list of matrikelnumbers we´ve seen in the email about the EINZELGESPRÄCHE
+     *  -- WE CONCLUDE that zero can only occur as first number (index = 0 , not translated)
+     *  -- AND even if zero was to be translated .. it is not clear from the exercise if zero would to be translated
+     *  -- after nine (in a sense of 1-> a ...., 9->i , 0->j) or it is excluded because the enumeration starts at 1 (which
+     *  -- is order-whise above zero und we can decude that zero therefore can be ignored
+     *
+     *  Solution: We introduce a parameter so that we can decide wether to ignore 0 or translate it in the above stated manner
+     */
+    private void calculateAndUpdate(boolean translateZeros){
 
-    private String getValueFromTextField(){
-        EditText matrNrEditText =  findViewById(R.id.matrikelNumber_editText);
-        String matrNr = matrNrEditText.getText().toString();
+        String matrNr = getMatrikelNumberFromField();
+        matrNr =  changedOddIndecesToLowerCaseLetters(matrNr, translateZeros);
+        updateMatrikelNumberField(matrNr);
+
+    }
+
+    private String changedOddIndecesToLowerCaseLetters(String matrNr, boolean translateZeros){
+        char workingVariable[] = matrNr.toCharArray();
+        for(int i = 1; i < matrNr.length(); i+=2){
+            //check if its a zero in ascii which has the int value 48
+            if(workingVariable[i] == 48){
+                //check bool variable if we should ignore zeros or cover according to assumption
+                workingVariable[i] += (translateZeros ? 1  : 0) * ASCIIZeroToSpecialCharacterOffset;
+            }
+            else {
+                workingVariable[i] += ASCIINumberToLoweCaseCharacterOffset;
+            }
+        }
+        return new String(workingVariable);
+    }
+
+    private EditText getMatrikelNumberField(){
+        return findViewById(R.id.matrikelNumber_editText);
+    }
+    private void updateMatrikelNumberField(String newMatrikelNumber){
+        getMatrikelNumberField().setText(newMatrikelNumber);
+    }
+    private String getMatrikelNumberFromField(){
+
+        String matrNr = getMatrikelNumberField().getText().toString();
         return matrNr;
         //check if empty and if numeric string
     }

@@ -22,7 +22,7 @@
         android:id="@+id/matrikelNumber_editText"
         android:layout_width="271dp"
         android:layout_height="60dp"
-        android:layout_marginStart="75dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="75dp"
         android:ems="10"
@@ -37,7 +37,7 @@
         android:layout_width="320dp"
         android:layout_height="39dp"
         android:layout_marginStart="46dp"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="25dp"
         android:text="@string/mainActivity_serverResponse"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -60,11 +60,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="141dp"
         android:text="@string/mainActivity_buttonLabel_send"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/serverResponse_textView" />
+
+    <Button
+        android:id="@+id/calculate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="141dp"
+        android:text="@string/mainActivity_calculate_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/send_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
